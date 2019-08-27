@@ -74,9 +74,9 @@ namespace PcDetails
             top.Add(menu);
 
 
-            var computerDetails = GetComputerDetails();
+            ComputerSystem computerDetails = new ComputerSystem();
 
-            var computerPropertiesList = new ListView(computerDetails.Keys.ToArray())
+            var computerPropertiesList = new ListView(computerDetails.ComputerDetailsDictionary.Keys.ToArray())
             {
                 X = 0, // Leave one row for the toplevel menu
                 Y = 1,
@@ -84,7 +84,7 @@ namespace PcDetails
                 Width = Dim.Percent(50),
                 Height = Dim.Fill()
             };
-            var computerValuesList = new ListView(computerDetails.Values.ToArray()) { X = Pos.Right(computerPropertiesList), Y = 1, Width = Dim.Fill(), Height = Dim.Fill() };
+            var computerValuesList = new ListView(computerDetails.ComputerDetailsDictionary.Values.ToArray()) { X = Pos.Right(computerPropertiesList), Y = 1, Width = Dim.Fill(), Height = Dim.Fill() };
 
 
             winComputerDetails.Add(computerPropertiesList);
@@ -105,32 +105,7 @@ namespace PcDetails
             win2.Add(listView1);
             win2.Add(listView2);
 
-            var hola = GetComputerDetails();
-
             Application.Run();
-        }
-
-        public static Dictionary<string, string> GetComputerDetails()
-        {
-            Dictionary<string, string> computerDetails = new Dictionary<string, string>();
-
-            ManagementClass mc = new ManagementClass("win32_computersystem");
-            ManagementObjectCollection moc = mc.GetInstances();
-
-            if (moc.Count > 0)
-            {
-                foreach (ManagementObject item in mc.GetInstances())
-                {
-                    computerDetails.Add("Caption", item["Caption"].ToString());
-                    computerDetails.Add("Manufacturer", item["Manufacturer"].ToString());
-                    computerDetails.Add("Model", item["Model"].ToString());
-                    computerDetails.Add("SystemType", item["SystemType"].ToString());
-                    computerDetails.Add("DNSHostName", item["DNSHostName"].ToString());
-                    computerDetails.Add("UserName", item["UserName"].ToString());
-                }
-            }
-
-            return computerDetails;
         }
     }
 }
