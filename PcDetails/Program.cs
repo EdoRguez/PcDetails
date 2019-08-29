@@ -23,36 +23,37 @@ namespace PcDetails
                 Width = Dim.Percent(50),
                 Height = Dim.Percent(50)
             };
-            var winDiskDriveDetails = new Window("Disk Drive Details")
+            var winOperatingSystemDetails = new Window("Operating System")
             {
                 X = Pos.Right(winComputerDetails),
                 Y = 1,
                 Width = Dim.Fill(),
-                Height = Dim.Percent(75)
+                Height = Dim.Percent(25)
             };
-
-            var win3 = new Window("MyApp3")
+            var winProcessorDetails = new Window("Processor Details")
             {
                 X = 0,
                 Y = Pos.Bottom(winComputerDetails),
                 Width = Dim.Percent(50),
                 Height = Dim.Fill()
             };
-
-            var win4 = new Window("MyApp4")
+            var winDiskDriveDetails = new Window("Disk Drive Details")
             {
-                X = Pos.Right(win3),
-                Y = Pos.Bottom(winDiskDriveDetails),
+                X = Pos.Right(winProcessorDetails),
+                Y = Pos.Bottom(winOperatingSystemDetails),
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
 
 
+
             top.Add(winComputerDetails);
             top.Add(winDiskDriveDetails);
-            top.Add(win3);
-            top.Add(win4);
+            top.Add(winProcessorDetails);
+            top.Add(winOperatingSystemDetails);
 
+
+            // Top menu bar
             var menu = new MenuBar(new MenuBarItem[] {
                 new MenuBarItem ("_File", new MenuItem [] {
                     new MenuItem ("_New", "Creates new file", null),
@@ -62,7 +63,7 @@ namespace PcDetails
             });
             top.Add(menu);
 
-
+            // Computer system elements
             ComputerSystem computerDetails = new ComputerSystem();
             var computerPropertiesList = new ListView(computerDetails.ComputerDetailsDictionary.Keys.ToArray())
             {
@@ -76,7 +77,7 @@ namespace PcDetails
             winComputerDetails.Add(computerValuesList);
 
 
-
+            // Disk drive elements
             DiskDrive diskDriveDetails = new DiskDrive();
             var diskPropertiesList = new ListView(diskDriveDetails.DiskDriveDetailsDictionary.Keys.ToArray())
             {
@@ -86,9 +87,22 @@ namespace PcDetails
                 Height = Dim.Fill()
             };
             var diskValuesList = new ListView(diskDriveDetails.DiskDriveDetailsDictionary.Values.ToArray()) { X = Pos.Right(diskPropertiesList), Y = 1, Width = Dim.Fill(), Height = Dim.Fill() };
-
             winDiskDriveDetails.Add(diskPropertiesList);
             winDiskDriveDetails.Add(diskValuesList);
+
+
+            // Processor elements
+            Processor processorDetails = new Processor();
+            var processorPropertiesList = new ListView(processorDetails.ProcessorDetailsDictionary.Keys.ToArray())
+            {
+                X = 0,
+                Y = 1,
+                Width = Dim.Percent(50),
+                Height = Dim.Fill()
+            };
+            var processorValuesList = new ListView(processorDetails.ProcessorDetailsDictionary.Values.ToArray()) { X = Pos.Right(processorPropertiesList), Y = 1, Width = Dim.Fill(), Height = Dim.Fill() };
+            winProcessorDetails.Add(processorPropertiesList);
+            winProcessorDetails.Add(processorValuesList);
 
             Application.Run();
         }
