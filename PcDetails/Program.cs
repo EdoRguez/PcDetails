@@ -16,32 +16,25 @@ namespace PcDetails
             Application.Init();
             var top = Application.Top;
 
-            // Creates the top-level window to show
             var winComputerDetails = new Window("Computer Details")
             {
                 X = 0,
-                Y = 1, // Leave one row for the toplevel menu
-
-                // By using Dim.Fill(), it will automatically resize without manual intervention
+                Y = 1,
                 Width = Dim.Percent(50),
                 Height = Dim.Percent(50)
             };
-            var win2 = new Window("MyApp2")
+            var winDiskDriveDetails = new Window("Disk Drive Details")
             {
                 X = Pos.Right(winComputerDetails),
-                Y = 1, // Leave one row for the toplevel menu
-
-                // By using Dim.Fill(), it will automatically resize without manual intervention
+                Y = 1,
                 Width = Dim.Fill(),
-                Height = Dim.Percent(50)
+                Height = Dim.Percent(75)
             };
 
             var win3 = new Window("MyApp3")
             {
                 X = 0,
-                Y = Pos.Bottom(winComputerDetails), // Leave one row for the toplevel menu
-
-                // By using Dim.Fill(), it will automatically resize without manual intervention
+                Y = Pos.Bottom(winComputerDetails),
                 Width = Dim.Percent(50),
                 Height = Dim.Fill()
             };
@@ -49,21 +42,17 @@ namespace PcDetails
             var win4 = new Window("MyApp4")
             {
                 X = Pos.Right(win3),
-                Y = Pos.Bottom(win2), // Leave one row for the toplevel menu
-
-                // By using Dim.Fill(), it will automatically resize without manual intervention
+                Y = Pos.Bottom(winDiskDriveDetails),
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
 
 
             top.Add(winComputerDetails);
-            top.Add(win2);
+            top.Add(winDiskDriveDetails);
             top.Add(win3);
             top.Add(win4);
 
-
-            // Creates a menubar, the item "New" has a help menu.
             var menu = new MenuBar(new MenuBarItem[] {
                 new MenuBarItem ("_File", new MenuItem [] {
                     new MenuItem ("_New", "Creates new file", null),
@@ -75,35 +64,31 @@ namespace PcDetails
 
 
             ComputerSystem computerDetails = new ComputerSystem();
-
             var computerPropertiesList = new ListView(computerDetails.ComputerDetailsDictionary.Keys.ToArray())
             {
-                X = 0, // Leave one row for the toplevel menu
+                X = 0,
                 Y = 1,
-                // By using Dim.Fill(), it will automatically resize without manual intervention
                 Width = Dim.Percent(50),
                 Height = Dim.Fill()
             };
             var computerValuesList = new ListView(computerDetails.ComputerDetailsDictionary.Values.ToArray()) { X = Pos.Right(computerPropertiesList), Y = 1, Width = Dim.Fill(), Height = Dim.Fill() };
-
-
             winComputerDetails.Add(computerPropertiesList);
             winComputerDetails.Add(computerValuesList);
 
 
 
-
-            var listView1 = new ListView(new String[] { "Hola", "Como", "Estas" })
+            DiskDrive diskDriveDetails = new DiskDrive();
+            var diskPropertiesList = new ListView(diskDriveDetails.DiskDriveDetailsDictionary.Keys.ToArray())
             {
-                X = 0, // Leave one row for the toplevel menu
-
-                // By using Dim.Fill(), it will automatically resize without manual intervention
+                X = 0,
+                Y = 1,
                 Width = Dim.Percent(50),
+                Height = Dim.Fill()
             };
-            var listView2 = new ListView(new String[] { "Bien", "Y", "Tu" }) { X = Pos.Right(listView1), Width = Dim.Fill() };
+            var diskValuesList = new ListView(diskDriveDetails.DiskDriveDetailsDictionary.Values.ToArray()) { X = Pos.Right(diskPropertiesList), Y = 1, Width = Dim.Fill(), Height = Dim.Fill() };
 
-            win2.Add(listView1);
-            win2.Add(listView2);
+            winDiskDriveDetails.Add(diskPropertiesList);
+            winDiskDriveDetails.Add(diskValuesList);
 
             Application.Run();
         }
