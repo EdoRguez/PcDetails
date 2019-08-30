@@ -28,7 +28,7 @@ namespace PcDetails
                 X = Pos.Right(winComputerDetails),
                 Y = 1,
                 Width = Dim.Fill(),
-                Height = Dim.Percent(25)
+                Height = Dim.Percent(30)
             };
             var winProcessorDetails = new Window("Processor Details")
             {
@@ -55,10 +55,10 @@ namespace PcDetails
 
             // Top menu bar
             var menu = new MenuBar(new MenuBarItem[] {
-                new MenuBarItem ("_File", new MenuItem [] {
-                    new MenuItem ("_New", "Creates new file", null),
-                    new MenuItem ("_Close", "", null),
-                    new MenuItem ("_Quit", "", null)
+                new MenuBarItem ("_More Details", new MenuItem [] {
+                    new MenuItem ("_Startup Programs", "", null),
+                    new MenuItem ("_IP Details", "", null),
+                    new MenuItem ("_CPU Temperature", "", null)
                 })
             });
             top.Add(menu);
@@ -103,6 +103,20 @@ namespace PcDetails
             var processorValuesList = new ListView(processorDetails.ProcessorDetailsDictionary.Values.ToArray()) { X = Pos.Right(processorPropertiesList), Y = 1, Width = Dim.Fill(), Height = Dim.Fill() };
             winProcessorDetails.Add(processorPropertiesList);
             winProcessorDetails.Add(processorValuesList);
+
+
+            // Operating System Details
+            OperatingSystem operatingSystemDetails = new OperatingSystem();
+            var operatingSystemPropertiesList = new ListView(operatingSystemDetails.OperatingSystemDetailsDictionary.Keys.ToArray())
+            {
+                X = 0,
+                Y = 1,
+                Width = Dim.Percent(50),
+                Height = Dim.Fill()
+            };
+            var operatingSystemValuesList = new ListView(operatingSystemDetails.OperatingSystemDetailsDictionary.Values.ToArray()) { X = Pos.Right(operatingSystemPropertiesList), Y = 1, Width = Dim.Fill(), Height = Dim.Fill() };
+            winOperatingSystemDetails.Add(operatingSystemPropertiesList);
+            winOperatingSystemDetails.Add(operatingSystemValuesList);
 
             Application.Run();
         }
