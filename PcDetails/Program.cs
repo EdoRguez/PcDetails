@@ -55,8 +55,8 @@ namespace PcDetails
 
             // Top menu bar
             var menu = new MenuBar(new MenuBarItem[] {
-                new MenuBarItem ("_More Details", new MenuItem [] {
-                    new MenuItem ("_Startup Programs", "", null),
+                new MenuBarItem ("_More", new MenuItem [] {
+                    new MenuItem ("_Startup Programs", "", () => { OpenStartupPrograms(top); }),
                     new MenuItem ("_IP Details", "", null),
                     new MenuItem ("_CPU Temperature", "", null)
                 })
@@ -120,5 +120,42 @@ namespace PcDetails
 
             Application.Run();
         }
+
+        public static void OpenStartupPrograms(Toplevel top)
+        {
+            var tframe = top.Frame;
+            var ntop = new Toplevel(tframe);
+            var menu = new MenuBar(new MenuBarItem[] {
+            new MenuBarItem ("_Options", new MenuItem [] {
+                    new MenuItem ("_Go Back", "", () => {Application.RequestStop ();}),
+                })
+            });
+            ntop.Add(menu);
+
+
+            var win = new Window("Untitled")
+            {
+                X = 0,
+                Y = 1,
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
+            ntop.Add(win);
+
+
+            Application.Run(ntop);
+        }
+
+        public static void OpenDialog()
+        {
+            var myDialog = new Dialog(
+            "Dialog Title", 50, 20,
+            new Button("Ok", is_default: true) { Clicked = () => { Application.RequestStop(); } },
+            new Button("Cancel") { Clicked = () => { Application.RequestStop(); } });
+            var ml2 = new Label(1, 1, "Dialog description");
+            myDialog.Add(ml2);
+            Application.Run(myDialog);
+        }
+
     }
 }
