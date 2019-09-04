@@ -57,7 +57,7 @@ namespace PcDetails
             var menu = new MenuBar(new MenuBarItem[] {
                 new MenuBarItem ("_More", new MenuItem [] {
                     new MenuItem ("_Startup Programs", "", () => { OpenStartupPrograms(top); }),
-                    new MenuItem ("_IP Details", "", null),
+                    new MenuItem ("_IP Details", "", () => { OpenIpDetails(top); }),
                     new MenuItem ("_CPU Temperature", "", null)
                 })
             });
@@ -157,6 +157,30 @@ namespace PcDetails
             var startupProgramsLocationsList = new ListView(startupPrograms.LocationList.ToArray()) { X = Pos.Right(startupProgramsNamesList), Y = 3, Width = Dim.Fill(), Height = Dim.Fill() };
             win.Add(startupProgramsNamesList);
             win.Add(startupProgramsLocationsList);
+
+            Application.Run(ntop);
+        }
+
+        public static void OpenIpDetails(Toplevel top)
+        {
+            var tframe = top.Frame;
+            var ntop = new Toplevel(tframe);
+            var menu = new MenuBar(new MenuBarItem[] {
+            new MenuBarItem ("_Options", new MenuItem [] {
+                    new MenuItem ("_Go Back", "", () => {Application.RequestStop ();}),
+                })
+            });
+            ntop.Add(menu);
+
+
+            var win = new Window("IP Details")
+            {
+                X = 0,
+                Y = 1,
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
+            ntop.Add(win);
 
             Application.Run(ntop);
         }
