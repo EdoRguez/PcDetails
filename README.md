@@ -8,17 +8,17 @@ PcDetails is a program that will allow you retrieve all your system information 
 
 ## Getting Started 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-
+Download, clone or fork the porject and open it in Visual Studio.
 
 ### Prerequisites 📋
 
 You should have installed Net Framework 4.7.2 on a Windows machine. Probably in a future I will make it cross platform.
 
+### Installing 🔧
 
-## Deployment ⚙️
+Download the project, open the folder and execute the following .exe *PcDetails/publish/setup.exe* 
 
-Download, clone or fork the porject and open it in Visual Studio.
+![alt text](https://i.imgur.com/KAtMLam.png)
 
 ## Built with 🛠️
 
