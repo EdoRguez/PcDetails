@@ -133,7 +133,7 @@ namespace PcDetails
             ntop.Add(menu);
 
 
-            var win = new Window("Untitled")
+            var win = new Window("Startup Programs")
             {
                 X = 0,
                 Y = 1,
@@ -142,6 +142,21 @@ namespace PcDetails
             };
             ntop.Add(win);
 
+            var title = new Label(" - List of startup programs and their locations") { X = 1, Y = 1 };
+            win.Add(title);
+
+            // Startup Programs Details
+            StartupPrograms startupPrograms = new StartupPrograms();
+            var startupProgramsNamesList = new ListView(startupPrograms.NamesList.ToArray())
+            {
+                X = 0,
+                Y = 3,
+                Width = Dim.Percent(30),
+                Height = Dim.Fill()
+            };
+            var startupProgramsLocationsList = new ListView(startupPrograms.LocationList.ToArray()) { X = Pos.Right(startupProgramsNamesList), Y = 3, Width = Dim.Fill(), Height = Dim.Fill() };
+            win.Add(startupProgramsNamesList);
+            win.Add(startupProgramsLocationsList);
 
             Application.Run(ntop);
         }
