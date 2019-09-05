@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Terminal.Gui;
 using System.Management;
 using System.Collections;
+using System.Diagnostics;
+using System.IO;
 
 namespace PcDetails
 {
@@ -181,6 +183,26 @@ namespace PcDetails
                 Height = Dim.Fill()
             };
             ntop.Add(win);
+
+            /*
+            IpDetails ipDetails = new IpDetails();
+            var labelDetails = new Label(ipDetails.GetIpDetails()) { X = 1, Y = 0 };
+            win.Add(labelDetails);
+            */
+
+            IpDetails ipDetails = new IpDetails();
+            var labelDetails = new Label(ipDetails.GetIpDetails()) { X = 1, Y = 0 };
+            
+            var scrollView = new ScrollView(new Rect(1, 1, 100, 100))
+            {
+                ContentSize = new Size(100, 100),
+                ShowVerticalScrollIndicator = true,
+            };
+
+            scrollView.Add(labelDetails);
+
+            win.Add(scrollView);
+
 
             Application.Run(ntop);
         }

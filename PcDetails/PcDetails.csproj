@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="ComputerSystem.cs" />
     <Compile Include="DiskDrive.cs" />
+    <Compile Include="IpDetails.cs" />
     <Compile Include="OperatingSystem.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Program.cs" />
